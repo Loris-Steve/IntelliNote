@@ -2,7 +2,7 @@
 plateforme de gestion de note
 
 BD :
-Exécutez le script intelliNote.sql de la base de données intellinote dans le repertoire backend
+Exécutez le script intelliNote.sql de la base de données Mysql intellinote dans le repertoire backend
 
 Backend :
 - lancer votre serveur php dans le repertoire du projet intellinote/backend
