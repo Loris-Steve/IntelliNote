@@ -118,17 +118,17 @@ require_once('generique/generique.modele.php');
                     LIMIT 0,1";
 
             $stmt = self::$bdd->prepare($sqlQuery);
-
+            
             $stmt->bindParam(1, $this->idFolder);
 
-            $stmt->execute();
-
-            $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            $this->name = $dataRow['name'];
-            $this->id_Folder = $dataRow['id_Folder'];
-            $this->id_User = $dataRow['id_User'];
-
+            if($stmt->execute()){
+                
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+                
+            }
+            else{
+                false;
+            }
         }        
 
         // UPDATE Folder

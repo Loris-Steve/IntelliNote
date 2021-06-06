@@ -22,25 +22,10 @@
         exit(0);
     }
     
-    
-    
-    // $http_origin = $_SERVER['HTTP_ORIGIN'];
-
     // $allowed_domains = array(
-    //     'http://example.com',
-    //     'https://example.com',
-    //     'http://app.example.com',
-    //     'https://app.example.com',
-    //     'http://www.example.com',
-    //     'https://www.example.com'
+    //     'http://localhost:3000',
+    //     'https://intellinote.com',
     // );
-    
-    // if (in_array(strtolower($http_origin), $allowed_domains))
-    // {  
-    //     // header("Access-Control-Allow-Origin: *");
-    //     header("Access-Control-Allow-Origin: $http_origin");
-    //     header('Access-Control-Allow-Credentials: true');
-    // }
     define('HOME_DIR', dirname(dirname(__FILE__)));
 
     //sécurité : on definie une constante pour bien obliger les utilisateur à passer par l'index
@@ -67,13 +52,23 @@
                     case 'note':
                         require_once('note/note.module.php');
                     break;
+
                 }
             }
             else{
-                http_response_code(400);
-                echo json_encode(
-                    array("message" => "action not found")
-                );
+                if ($_GET['module'] == "sparql"){
+                        require_once('sparql/sparql.php');
+                        $sparql = new Sparql();
+                        echo json_encode(
+                            $sparql->searchBasket());
+                }
+                else{
+
+                    http_response_code(400);
+                    echo json_encode(
+                        array("message" => "action not found")
+                    );
+                }
             }
         }
         else{

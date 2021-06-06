@@ -60,7 +60,7 @@ require_once('generique/generique.modele.php');
 
         // CREATE User
         public function createUser(){
-            echo "name ".$this->name." email ".$this->email." password ".$this->password ;
+            //echo "name ".$this->name." email ".$this->email." password ".$this->password ;
 
             $sqlQuery = "INSERT INTO
                         ". $this->dbTable ."
@@ -69,7 +69,7 @@ require_once('generique/generique.modele.php');
                         email = :email, 
                         password = :password";
         
-                        echo "query : ".$sqlQuery;
+                        //echo "query : ".$sqlQuery;
             $stmt = self::$bdd->prepare($sqlQuery);
         
             // sanitize
@@ -80,7 +80,7 @@ require_once('generique/generique.modele.php');
             // bind data
             $stmt->bindParam(":name", $this->name);
             $stmt->bindParam(":email", $this->email);
-            $stmt->bindParam(":password", $this->password);
+            $stmt->bindParam(":password", password_hash($this->password,PASSWORD_DEFAULT));
         
             if($stmt->execute()){
                return true;
@@ -90,10 +90,6 @@ require_once('generique/generique.modele.php');
 
         // GET User
         public function getSingleUser(){
-            $params_query = "";
-            if($this->password){
-                $params_query = $params_query." AND password = ?";
-            }
             $sqlQuery = "SELECT
                         idUser,
                         name, 
@@ -103,7 +99,6 @@ require_once('generique/generique.modele.php');
                         ". $this->dbTable ."
                     WHERE 
                        email = ? 
-                       ".$params_query."
                     LIMIT 0,1";
 
             $stmt =  self::$bdd->prepare($sqlQuery);
@@ -111,11 +106,6 @@ require_once('generique/generique.modele.php');
             $this->email=htmlspecialchars(strip_tags($this->email));
 
             $stmt->bindParam(1, $this->email);
-
-            if($this->password){
-                $this->password=htmlspecialchars(strip_tags($this->password));
-                $stmt->bindParam(2, $this->password);
-            }
 
             if($stmt->execute()){
                 
@@ -164,7 +154,7 @@ require_once('generique/generique.modele.php');
             }
             if($this->password){
                 $stmt->bindParam(":password", $this->password);
-                $this->password=htmlspecialchars(strip_tags($this->password));
+                $this->password=htmlspecialchars(strip_tags(password_hash($this->password,PASSWORD_DEFAULT)));
             }
         
             if($stmt->execute()){

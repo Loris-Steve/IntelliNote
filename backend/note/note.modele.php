@@ -74,7 +74,7 @@ require_once('generique/generique.modele.php');
         
         // GET Notes
         public function getUserNotes(){
-            $sqlQuery = "SELECT idNote, n.name, n.id_Folder, content, pos FROM "
+            $sqlQuery = "SELECT idNote, n.name, n.id_Folder, content, pos , f.id_User FROM "
              . $this->dbTable . " n , folders f where n.id_Folder = f.idFolder AND
               f.id_User = ? ";
 
@@ -84,6 +84,23 @@ require_once('generique/generique.modele.php');
 
             if($stmt->execute()){
                 return $stmt;
+            }
+            else
+                return false;
+        }
+
+        // GET Note
+        public function getSingleNote(){
+            $sqlQuery = "SELECT idNote, n.name, n.id_Folder, content, pos , f.id_User FROM "
+                . $this->dbTable . " n , folders f where n.id_Folder = f.idFolder AND
+                n.idNote = ? LIMIT 0,1";
+
+            $stmt = self::$bdd->prepare($sqlQuery);
+            
+            $stmt->bindParam(1, $this->idNote);
+
+            if($stmt->execute()){
+                return $stmt->fetch(PDO::FETCH_ASSOC);
             }
             else
                 return false;
@@ -197,7 +214,7 @@ require_once('generique/generique.modele.php');
         // DELETE Note
         function deleteNote(){
             $sqlQuery = "DELETE FROM " . $this->dbTable . " WHERE idNote = ?";
-            echo "idNote : ".$this->idNote."query ".$sqlQuery ;
+            //echo "idNote : ".$this->idNote."query ".$sqlQuery ;
             $stmt = self::$bdd->prepare($sqlQuery);
             
             $this->idNote=htmlspecialchars(strip_tags($this->idNote));
