@@ -1,5 +1,11 @@
 <?php
 
+    
+    // $allowed_domains = array(
+    //     'http://localhost:3000',
+    //     'https://intellinote.com',
+    // );
+    
     // Allow from any origin
     if (isset($_SERVER['HTTP_ORIGIN'])) {
         // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -21,11 +27,8 @@
     
         exit(0);
     }
-    
-    // $allowed_domains = array(
-    //     'http://localhost:3000',
-    //     'https://intellinote.com',
-    // );
+
+
     define('HOME_DIR', dirname(dirname(__FILE__)));
 
     //sécurité : on definie une constante pour bien obliger les utilisateur à passer par l'index

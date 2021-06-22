@@ -52,8 +52,8 @@ require_once('user/user.modele.php');
                 }
             }
             else{
-                echo json_encode(array("message" => "User aleready exist"));
                 http_response_code(400);
+                echo json_encode(array("message" => "User aleready exist"));
             }
         }
 
