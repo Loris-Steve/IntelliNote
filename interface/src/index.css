@@ -1,0 +1,86 @@
+* {
+  --query : 
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.navbar{
+  min-height: 10vh;
+  background: linear-gradient(-45deg, #dacd95, #c57c1d);
+  box-shadow: 0 6.4px 14.4px 0 rgb(0 0 0 / 13%), 0 1.2px 3.6px 0 rgb(0 0 0 / 11%) ;
+
+}
+
+.webSiteContent {
+  min-height: 90vh;
+}
+
+aside {
+  height: 100%;
+}
+
+footer {
+  min-height: 10vh;
+}
+
+.shad {
+  box-shadow: 0 6.4px 14.4px 0 rgb(0 0 0 / 13%), 0 1.2px 3.6px 0 rgb(0 0 0 / 11%) ;
+
+}
+
+.searchContent {
+  width: 30%;
+  position:  fixed;
+  top : 2vh;
+  left : 40%;
+  z-index: 10;
+  opacity: 0.8;
+  border-color: antiquewhite;
+  border-radius: 2%;
+}
+.searchContent:hover {
+  opacity: 1;
+}
+.searchContent input {
+  padding: 1.5vh;
+  background-color:rgba(0,0,0,0) !important;
+  border:none !important;
+  border-color: antiquewhite;
+  border-radius: 2%;
+  width: 100%;
+}
+
+.searchContent input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: antiquewhite;
+}
+.searchContent button{
+
+}
+.textLong {
+  word-wrap: break-word;
+}
+@media only screen and (max-width: 750px) {
+  .autocomplete {
+    width: 94%;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .searchContent {
+    top : 2vh;
+    width: 22%;
+  }
+}
